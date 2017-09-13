@@ -6,6 +6,8 @@ class Block(models.Model):
     name = models.CharField("板块标题", max_length=100)  #设置列类型，名字，长度
     desc = models.CharField("板块描述", max_length=100)
     manager_name = models.CharField("管理员名字", max_length=100)
+    status = models.IntegerField("状态",
+            choices =((0, "正常"), (-1, "删除")))
 
     def __str__(self):
         return self.name
