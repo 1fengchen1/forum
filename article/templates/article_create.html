@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+
+<ol class="breadcrumb">
+  <li><a href="/">首页</a></li>
+  <li><a href="/article/list/{{b.id}}">{{b.name}}</a></li>
+  <li class="active">创建文章</li>
+</ol>
+
+<form class="form-horizontal">
+  <div class="control-group">
+    <label class="control-label" >文章</label>
+    <div class="controls">
+      <input type="text" class="search-query" placeholder="文章">
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" >内容</label>
+    <div class="controls">
+      <textarea class="span5" rows="3" placeholder="内容"></textarea>
+    </div>
+  </div>
+
+  <br/>
+
+  <div class="control-group">
+    <div class="controls">
+      <button class="btn btn-primary">发 表</button>
+    </div>
+  </div>
+</form>
+{% endblock %}
