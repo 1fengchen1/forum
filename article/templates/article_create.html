@@ -7,27 +7,31 @@
   <li class="active">创建文章</li>
 </ol>
 
-<form class="form-horizontal">
-  <div class="control-group">
-    <label class="control-label" >文章</label>
-    <div class="controls">
-      <input type="text" class="search-query" placeholder="文章">
+
+<form class="form-horizontal" action="/article/create/{{b.id}}" method="POST">{% csrf_token %}
+
+  <div class="form-group">
+    <label  class="col-sm-1 control-label">标题</label>
+    <div class="col-sm-11">
+      <input class="form-control" id="inputTitle" name="title" value="{{ title }}" placeholder="标题">
     </div>
   </div>
 
-  <div class="control-group">
-    <label class="control-label" >内容</label>
-    <div class="controls">
-      <textarea class="span5" rows="3" placeholder="内容"></textarea>
+  <div class="form-group">
+    <label class="col-sm-1 control-label">内容</label>
+    <div class="col-sm-11">
+      <textarea class="form-control" rows="5" name="content" placeholder="内容">{{ content }}</textarea>
     </div>
   </div>
 
-  <br/>
 
-  <div class="control-group">
-    <div class="controls">
-      <button class="btn btn-primary">发 表</button>
+  <div class="form-group">
+    <div class="col-sm-offset-1 col-sm-10">
+      <button type="submit" class="btn btn-primary">提 交</button>
     </div>
   </div>
+{% if error %}
+<div class="alret alert-danger">{{ error }}</div>
+{%　endif %}
 </form>
 {% endblock %}
