@@ -2,8 +2,8 @@
 {% block content %}
 <ol class="breadcrumb">
   <li><a href="/">首页</a> </li>
-  <li><a href="/article/list/{{a.block}}">{{a.block.name}}</a></li>
-  <li class="active">{{a.name}}</li>
+  <li><a href="/article/list/{{a.block.id}}">{{a.block.name}}</a></li>
+  <li class="active">{{a.title}}</li>
 </ol>
 
 <a href="/article/create/{{b.id}}" class="btn btn-primary">发表文章</a>

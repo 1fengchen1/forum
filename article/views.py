@@ -14,7 +14,7 @@ def article_list(request, block_id):
     ARTICLE_CNT_1PAGE = 3   #定义一页多少数据
     page_no = int(request.GET.get("page_no", "1"))
     p = Paginator(all_articles, ARTICLE_CNT_1PAGE)     #分页器实例p
-    page = p.page(page_no)                              #第几页：参数page_no是GET的参数
+    page = p.page(page_no)                              #提取第几页：参数page_no是GET的参数
     articles_objs = page.object_list                     #取出指定页的文章们
     '''分页算法'''
     page_cnt = p.num_pages                                      #总页数
@@ -29,7 +29,7 @@ def article_list(request, block_id):
                 "page_cnt":page_cnt, "current_no":current_no,
                 "page_links":page_links, "previous_link":previous_link,
                 "next_link":next_link, "has_previous":has_previous,
-                "has_next":has_next}
+                "has_next":has_next, "articles":articles_objs}
 
     return render(request, 'article_list.html', argument)  #将响应返回给浏览器，第三个参数，htmll里面的参数填充
 
