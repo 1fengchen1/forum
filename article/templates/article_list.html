@@ -29,4 +29,33 @@
     {% endfor %}
   </tbody>
 </table>
+
+<nav>
+  <ul class="pagination">
+    <li>
+      <a href="?page_no={{ 1 }}">首页</a>
+    </li>
+    <li>
+      <a href="?page_no={{ previous_link }}">&laquo;</a>
+    </li>
+    <li>
+      <a href="?page_no={{ has_previous }}">{{ has_previous }}</a>
+    </li>
+    <li>
+      <a href="?page_no={{ page_links }}">{{ page_links }}</a>
+    </li>
+    <li class="active">
+      <a href="?page_no={{ current_no }}">{{ current_no }}</a>
+    </li>
+    <li>
+      <a href="?page_no={{ has_next }}">{{ has_next }}</a>
+    </li>
+    <li>
+      <a href="?page_no={{ previous_link }}">&raquo;</a>
+    </li>
+    <li>
+      <a href="?page_no={{ 1 }}">尾页</a>
+    </li>
+  </ul>
+</nav>
 {% endblock %}
