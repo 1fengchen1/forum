@@ -3,6 +3,7 @@ from blocks.models import Block
 from article.models import Article
 from django.shortcuts import redirect
 from .forms import ArticleForm
+from django.views.generic import  DetailView
 
 '''文章列表页面处理方法'''
 def article_list(request, block_id):
@@ -28,4 +29,9 @@ def article_create(request, block_id):
             return redirect("/article/list/%s" % block_id)  #重定向页面(重新请求一个页面)，直接返回到模板下list的页面
         else:
             return render(request, "article_create.html", {"b":block, "form":form})
+
+class ArticleDetailView(DetailView):
+    model = Article
+    template_name = 'article_detail.html'
+    context_object_name = "a"
 
