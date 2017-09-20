@@ -42,15 +42,18 @@
     </li>
     {% endif %}
     {% for page_link in page_links %}
+    {% if page_link != current_no %}
     <li>
       <a href="?page_no={{ page_link }}">{{ page_link }}</a>
     </li>
-    {% endfor %}
-    {% if current_no %}
+    {% endif %}
+    {% if page_link == current_no %}
     <li class="active">
-      <a href="?page_no={{ current_no }}">{{ current_no }}</a>
+      <a href="?page_no={{ page_link }}">{{ page_link }}</a>
     </li>
     {% endif %}
+    {% endfor %}
+
     {% if has_next %}
     <li>
       <a href="?page_no={{ next_link }}">&raquo;</a>
