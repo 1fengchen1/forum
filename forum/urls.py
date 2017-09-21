@@ -16,11 +16,12 @@ Including another URLconf
 
 from django.conf.urls import url, include
 from django.contrib import admin
-
+from registers.views import register
 import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^article/', include('article.urls')), #后面是article下面的路径
     url(r'^$', views.index),
+    url(r'^registers/$', register),
 ]
