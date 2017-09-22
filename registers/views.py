@@ -11,11 +11,16 @@ def register(request):
         return render(request, "register.html")
     else:
         form = RegisterForm(request.POST)
-        if form.is_valid():
-           registerdo = form.save(commit=False)
-           registerdo.is_active = False
-           registerdo.save()
-           return render(request, "register_sucess.html")
+        password = request.POST["password"]
+        repassword = request.POST["repassword"]
+        if password != repassword:                              #密码不一致的响应提示
+            return  render(request, "register.html", {'form':form, "error":"两次密码不一致，请重新输入。"})
         else:
-            return render(request, "register.html", {"form":form})
+            if form.is_valid():                                 #输入字段符合数据库定义要求的响应
+               registerdo = form.save(commit=False)
+               registerdo.is_active = False
+               registerdo.save()
+               return render(request, "register_sucess.html")
+            else:                                                #输入字段不符合数据库的要求
+                return render(request, "register.html", {"form":form})
 

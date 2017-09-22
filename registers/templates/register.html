@@ -4,10 +4,13 @@
 {% for field in form %}
 	{% if field.errors %}
 		{% for error in field.errors %}
-      <div class="alret alert-danger">{{ field.label }}: {{ error }}</div>
+      <div class="alert alert-danger">{{ field.label }}: {{ error }}</div>
     {% endfor %}
   {% endif %}
 {% endfor %}
+{% if error %}
+	<div class="alert alert-danger">{{ error }}</div>
+{% endif %}
 
 <div class="panel panel-info">
   <div class="panel-heading">
