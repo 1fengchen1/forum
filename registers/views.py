@@ -1,19 +1,21 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponse
 from django.contrib.auth.models import User
 from .froms import RegisterForm
 
+def sucess(request):
+    return HttpResponse("Success")
+
 def register(request):
-    parameter = {"username":User.username, "password":User.password,
-                 "email":User.email}
     if request.method == "GET":
         return render(request, "register.html")
     else:
         form = RegisterForm(request.POST)
-        if form.is_valid() and password == repassword:
+        if form.is_valid():
            registerdo = form.save(commit=False)
-           registerdo.password =
+           registerdo.is_active = False
            registerdo.save()
-           return redirect("/")
+           return render(request, "register_sucess.html")
         else:
-            return render(request, "register.html", parameter)
+            return render(request, "register.html", {"form":form})
 

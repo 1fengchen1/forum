@@ -14,7 +14,7 @@
     <center><h3 class="panel-title">请输入注册信息</h3></center>
   </div>
 
-  <form class="form-horizontal">
+  <form class="form-horizontal" action="/registers/" method="POST">{% csrf_token %}
 	  <div class="panel-body">
 	    <div class="input-group input-group-lg panel">
 	      <span class="input-group-addon" id="sizing-addon1">用户名</span>
@@ -23,17 +23,17 @@
 	    </div>
 	    <div class="input-group input-group-lg panel">
 	      <span class="input-group-addon" id="sizing-addon2">密码</span>
-	      <input type="text" class="form-control" placeholder="Password"
+	      <input type="password" class="form-control" placeholder="Password"
 	             id="password" name="password"  aria-describedby="sizing-addon1">
 	    </div>
 	    <div class="input-group input-group-lg panel">
 	      <span class="input-group-addon" id="sizing-addon3">确认密码</span>
-	      <input type="text" class="form-control" placeholder="Repassword"
+	      <input type="password" class="form-control" placeholder="Repassword"
 	             id="repassword" name="repassword"  aria-describedby="sizing-addon1">
 	    </div>
 	    <div class="input-group input-group-lg panel">
 	      <span class="input-group-addon" id="sizing-addon4">邮箱</span>
-	      <input type="text" class="form-control" placeholder="Email"
+	      <input type="email" class="form-control" placeholder="Email"
 	             name="email" value="{{ form.email.value }}" aria-describedby="sizing-addon1">
 	    </div>
 	    <div>
