@@ -16,9 +16,9 @@ class Article(models.Model):
     #最后更新时间
     last_timestamp = models.DateTimeField("最后更新时间", auto_now=True)
 
-    def __str__(self):
+    def __str__(self):                  #将title展示在列表下并汉化
         return self.title
 
     class Meta:
-        verbose_name = "文章"
-        verbose_name_plural = "文章"
+        verbose_name = "文章"                     #后台列表表名
+        verbose_name_plural = "文章"              #后台外层展示名

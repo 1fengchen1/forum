@@ -16,7 +16,7 @@ Including another URLconf
 
 from django.conf.urls import url, include
 from django.contrib import admin
-from registers.views import register
+from registers.views import register,approveemil
 import views
 
 urlpatterns = [
@@ -24,4 +24,5 @@ urlpatterns = [
     url(r'^article/', include('article.urls')), #后面是article下面的路径
     url(r'^$', views.index),
     url(r'^registers/$', register),
+    url(r'^approve/(?P<code>\w+)$', approveemil),    #激活链接
 ]
