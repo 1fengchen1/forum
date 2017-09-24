@@ -25,4 +25,5 @@ urlpatterns = [
     url(r'^$', views.index),
     url(r'^registers/$', register),
     url(r'^approve/(?P<code>\w+)$', approveemil),    #激活链接
+    url(r'^accounts/', include('django.contrib.auth.urls')),    #登录链接
 ]

@@ -19,7 +19,7 @@ def register(request):
             return  render(request, "register.html", {'form':form, "error":"两次密码不一致，请重新输入。"})
         ########两次密码不一致########
         else:
-            if form.is_valid():                                                                 # 输入字段符合数据库定义要求的响应
+            if form.is_valid():                                                                  # 输入字段符合数据库定义要求的响应
                 registerdo = form.save(commit=False)
                 registerdo.is_active = False
                 ########激活码链接发送到邮箱########
