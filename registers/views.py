@@ -12,20 +12,28 @@ def register(request):
         return render(request, "register.html")
     else:
         form = RegisterForm(request.POST)                                                       # 校验器实例化
-        ########两次密码不一致########
-        password = request.POST["password"]
-        repassword = request.POST["repassword"]
-        if password != repassword:                                                              # 密码不一致的响应提示
-            return  render(request, "register.html", {'form':form, "error":"两次密码不一致，请重新输入。"})
-        ########两次密码不一致########
-        else:
-            if form.is_valid():                                                                  # 输入字段符合数据库定义要求的响应
-                username = form.cleaned_data["username"]
-                email = form.cleaned_data["email"]
-                password = form.cleaned_data["password"]
+        # 输入字段符合数据库定义要求的响应
+        if form.is_valid():
+            username = form.cleaned_data["username"]
+            email = form.cleaned_data["email"]
+            password = form.cleaned_data["password"]
+            repassword = request.POST["repassword"]
+            aemail = User.objects.all().values('email')
+            allemail = [key for item in aemail for key in item.values()]
+            print(allemail)
+            ########两次密码不一致########
+            if password != repassword:  # 密码不一致的响应提示
+                return render(request, "register.html", {'form': form, "error": "两次密码不一致，请重新输入。"})
+            ########两次密码不一致########
+            ########邮箱已被注册##########
+            elif email in allemail:
+                return render(request, "register.html", {'form': form, 'error':"邮箱已被注册。"})
+
+            ########邮箱已被注册##########
+            else:
                 user = User.objects.create_user(username, email, password)
                 user.is_active = False
-                user.is_staff = False
+
                 ########激活码链接发送到邮箱########
                 activation_code = str(uuid.uuid4()).replace("-", "")                             # 激活码
                 activation_url = "http://%s/approve/%s" % (request.get_host(), activation_code)  # 激活码链接
@@ -41,8 +49,8 @@ def register(request):
                 code.save()                                                                       # 保存到激活码表
                 user.save()                                                                 # 保存到用户表
                 return render(request, "register_sucess.html")
-            else:                                                                                 # 输入字段不符合数据库的要求
-                return render(request, "register.html", {"form":form})
+        else:                                                                                 # 输入字段不符合数据库的要求
+            return render(request, "register.html", {"form":form})
 
 
 '''认证邮箱'''
