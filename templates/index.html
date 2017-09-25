@@ -16,7 +16,21 @@
   </div>
 
   <div class="col-xs-12 col-md-2">
-    <center><div class="well">个人中心</div></center>
+    {% if user.is_authenticated %}
+      <center>
+      <div class="well">
+        <p>{{ user.username }}.欢迎您来到Python技术栈</p>
+        <a href="/accounts/logout">退出</a>
+      </div>
+      </center>
+    {% else%}
+      <center>
+      <div class="well">
+        <p>匿名用户.欢迎您来到Python技术栈</p>
+        <a href="/accounts/login">登录</a>
+      </div>
+      </center>
+    {% endif%}
   </div>
 
 </div>

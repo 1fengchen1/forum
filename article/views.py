@@ -5,6 +5,7 @@ from django.shortcuts import redirect
 from .forms import ArticleForm
 from django.views.generic import  DetailView
 from django.core.paginator import Paginator
+from django.contrib.auth.decorators import login_required
 
 '''文章列表页面处理方法'''
 def article_list(request, block_id):
@@ -36,6 +37,7 @@ def article_list(request, block_id):
 
 
 '''创建文章页面的GET处理方法和POST处理方法'''
+@login_required
 def article_create(request, block_id):
     block_id = int(block_id)
     block = Block.objects.get(id=block_id)
@@ -47,6 +49,7 @@ def article_create(request, block_id):
         if form.is_valid():             #参数合法
             article = form.save(commit=False)   #form校验器里面的属性都赋值给article对象，并不存进数据库，对象还在内存中
             article.block = block
+            article.owner = request.user
             article.status = 0
             article.save()
             return redirect("/article/list/%s" % block_id)  #重定向页面(重新请求一个页面)，直接返回到模板下list的页面

@@ -2,18 +2,18 @@
 {% block content %}
 
 {% if form.non_field_errors %}
-	{% for error in form.non_field_errors %}
-		<div class="alert alert-danger">{{ error }}</div>
+  {% for error in form.non_field_errors %}
+  <div class="alert alert-danger">{{ error }}</div>
 	{% endfor%}
 {% endif %}
 {% if form.username.errors %}
 	{% for error in form.uername.errors %}
-		<div class="alert alert-danger">用户名：{{ error }}</div>
+	<div class="alert alert-danger">用户名：{{ error }}</div>
 	{% endfor %}
 {% endif %}
 {% if form.password.errors %}
 	{% for error in form.password.errors %}
-		<div class="alert alert-danger">密码：{{ error }}</div>
+	<div class="alert alert-danger">密码：{{ error }}</div>
 	{% endfor %}
 {% endif %}
 
@@ -23,6 +23,7 @@
   </div>
 
   <form class="form-horizontal" action="/accounts/login/" method="POST">{% csrf_token %}
+	  <input type="hidden" name="next" value="{{ next }}"/>
 	  <div class="panel-body">
 	    <div class="input-group input-group-lg panel">
 	      <span class="input-group-addon" id="sizing-addon1">用户名</span>
@@ -41,5 +42,8 @@
 	  </div>
   </form>
 
+</div>
+<div class="col-xs-12">
+	你还没有注册?  那就<a href="/registers/">去注册</a>
 </div>
 {% endblock %}
