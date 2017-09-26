@@ -6,18 +6,21 @@ from .forms import ArticleForm
 from django.views.generic import  DetailView
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
+from .sorter import paginate_queryset
 
 '''文章列表页面处理方法'''
 def article_list(request, block_id):
     block_id = int(block_id)
     block = Block.objects.get(id=block_id)  #Block表的id列传给block参数
     all_articles = Article.objects.filter(block=block, status=0).order_by("-id")   #Article表的Block_id列和status=0的列传给articles_objs，并根据id降序排序
-    ARTICLE_CNT_1PAGE = 3   #定义一页多少数据
     page_no = int(request.GET.get("page_no", "1"))
+    '''
+    ##############做成工具###########
+    ARTICLE_CNT_1PAGE = 3  # 定义一页多少数据
     p = Paginator(all_articles, ARTICLE_CNT_1PAGE)     #分页器实例p
     page = p.page(page_no)                              #提取第几页：参数page_no是GET的参数
     articles_objs = page.object_list                     #取出指定页的文章们
-    '''分页算法'''
+    #分页算法#
     page_cnt = p.num_pages                                      #总页数
     current_no = page_no                                        #当前页码
     page_links = [i for i in range(page_no-2, page_no+3)        #标页列表
@@ -26,12 +29,14 @@ def article_list(request, block_id):
     next_link = page_links[-1]+1                                #最大页+1
     has_previous = previous_link > 0                            #有前页
     has_next = next_link <= page_cnt                            #有后页
-    argument = {'articles':all_articles, "b":block,
+    argument = { "b":block, "articles":articles_objs,
                 "page_cnt":page_cnt, "current_no":current_no,
                 "page_links":page_links, "previous_link":previous_link,
                 "next_link":next_link, "has_previous":has_previous,
-                "has_next":has_next, "articles":articles_objs}
-
+                "has_next":has_next}
+    '''
+    page_articles, pagination_data= paginate_queryset(all_articles, page_no, cnt_per_page=3)
+    argument = {"articles":page_articles, "b":block, 'pagination_data':pagination_data}
     return render(request, 'article_list.html', argument)  #将响应返回给浏览器，第三个参数，htmll里面的参数填充
 
 
