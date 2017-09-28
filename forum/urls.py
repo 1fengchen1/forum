@@ -17,6 +17,7 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from registers.views import register,approveemil
+from comments.views import comment_create
 import views
 
 urlpatterns = [
@@ -26,4 +27,5 @@ urlpatterns = [
     url(r'^registers/$', register),
     url(r'^approve/(?P<code>\w+)$', approveemil),    #激活链接
     url(r'^accounts/', include('django.contrib.auth.urls')),    #登录链接
+    url(r'/comment/create/', comment_create),
 ]

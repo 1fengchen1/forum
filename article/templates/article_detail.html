@@ -13,17 +13,68 @@
 <table class="table table-bordered">
   <thead>
     <tr>
-      <th>标题</th>
-      <th>作者</th>
-      <th>内容</th>
+      <th width="20%">作者:</th>
+      <th width="80%">内容:</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>{{ a.title }}</td>
-      <td>风尘</td>
+      <td>{{ a.owner }}</td>
       <td>{{ a.content }}</td>
     </tr>
   </tbody>
 </table>
+
+<br/>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th width="20%">评论人：</th>
+      <th width="80%">评论内容：</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{{ a.owner }}</td>
+      <td>{{ a.content }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<nav>
+  <ul class="pagination">
+
+    {% if pagination_data.has_previous %}
+    <li>
+      <a href="?page_no={{ 1 }}">首页</a>
+    </li>
+    <li>
+      <a href="?page_no={{ pagination_data.previous_link }}">&laquo;</a>
+    </li>
+    {% endif %}
+    {% for page_link in pagination_data.page_links %}
+    {% if page_link != pagination_data.current_no %}
+    <li>
+      <a href="?page_no={{ page_link }}">{{ page_link }}</a>
+    </li>
+    {% endif %}
+    {% if page_link == pagination_data.current_no %}
+    <li class="active">
+      <a href="?page_no={{ page_link }}">{{ page_link }}</a>
+    </li>
+    {% endif %}
+    {% endfor %}
+
+    {% if pagination_data.has_next %}
+    <li>
+      <a href="?page_no={{ pagination_data.next_link }}">&raquo;</a>
+    </li>
+    <li>
+      <a href="?page_no={{ pagination_data.page_cnt }}">尾页</a>
+    </li>
+    {% endif %}
+  </ul>
+</nav>
+
 {% endblock %}

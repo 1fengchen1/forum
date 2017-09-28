@@ -8,7 +8,7 @@ def paginate_queryset(objs, page_no, cnt_per_page=10, half_show_length=3):
 	if page_no <= 0:	#想要的当前页<=0
 		page_no = 1
 	page_links = [i for i in range(page_no - half_show_length, page_no + half_show_length + 1)        #标页列表
-                  if i > 0 and i <= p.num_pages]
+				  if i > 0 and i <= p.num_pages]
 	page = p.page(page_no)                  #提取第几页：参数page_no是GET的参数
 	previous_link = page_links[0]-1			#最小页-1
 	next_link = page_links[-1]+1          	#最大页+1

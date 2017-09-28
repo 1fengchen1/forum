@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'blocks',
     'article',
     'registers',
+    'comments',
 ]
 
 MIDDLEWARE = [
