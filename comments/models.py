@@ -12,7 +12,7 @@ class Comment(models.Model):
     last_update_timestamp = models.DateTimeField("更新时间", auto_now=True)
 
     def __str__(self):
-        return self.owner
+        return self.articl
 
     class Mate:
         verbose_name = "评论内容"
