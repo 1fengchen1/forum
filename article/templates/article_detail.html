@@ -100,8 +100,9 @@ $(document).ready(function(){
   var article_id = {{ a.id }}
 
   $("#commentBtn").click(function(){
-    var comment = $("commentContent").val();
+    var comment = $("#commentContent").val();
     var param = {"article_id":article_id, 'content':comment};
+    alert(comment)
     $.post("/comment/create/", param, function(data){
       var ret = JSON.parse(data);
       if (ret["status"] == "ok"){

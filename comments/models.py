@@ -3,7 +3,7 @@ from article.models import Article
 
 class Comment(models.Model):
 
-    articl = models.ForeignKey(Article, verbose_name="文章")
+    article = models.ForeignKey(Article, verbose_name="文章")
     owner = models.CharField("评论人", max_length=20)
     content = models.CharField("评论内容", max_length=10000)
     status = models.IntegerField("状态",
@@ -12,7 +12,7 @@ class Comment(models.Model):
     last_update_timestamp = models.DateTimeField("更新时间", auto_now=True)
 
     def __str__(self):
-        return self.articl
+        return self.content
 
     class Mate:
         verbose_name = "评论内容"
