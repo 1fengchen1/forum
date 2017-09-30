@@ -35,14 +35,15 @@
     </tr>
   </thead>
   <tbody>
+    {% for comment in comments %}
     <tr>
-      <td>{{ a.owner }}</td>
-      <td>{{ a.content }}</td>
+      <td>{{ comment.owner }}</td>
+      <td>{{ comment.content }}</td>
     </tr>
+    {% endfor %}
   </tbody>
 </table>
 
-<!--
 <nav>
   <ul class="pagination">
 
@@ -77,8 +78,8 @@
     {% endif %}
   </ul>
 </nav>
--->
-<!--创建评论部分的form表单-->
+{% if user.is_authenticated %}
+<!--创建评论部分的表单-->
 <div class="form-horizontal">
 <div class="form-group">
   <div class="col-xs-12 col-sm-12">
@@ -87,10 +88,15 @@
 </div>
 <div class="form-group">
   <div class="col-sm-xs-12 col-sm-12">
-    <center><button id="commentBtn" type="submit" href="/comment/create/" class="btn btn-primary">发表评论</button></center>
+    <center><button id="commentBtn"  class="btn btn-primary">发表评论</button></center>
   </div>
 </div>
 </div>
+<br/>
+<br/>
+{% else %}
+  <p>未登录,请先<a href="/accounts/login?next=/article/detail/{{ a.id }}">登录</a></p>
+{% endif %}
 <!--创建评论部分的的form表单-->
 <!--创建评论部分的js请求处理-->
 <script type="text/javascript" src="/static/js/jquery-1.9.1.min.js"></script>
@@ -100,13 +106,14 @@ $(document).ready(function(){
   var article_id = {{ a.id }}
 
   $("#commentBtn").click(function(){
-    var comment = $("commentContent").val();
+    var comment = $("#commentContent").val();
     var param = {"article_id":article_id, 'content':comment};
+    alert(comment)
     $.post("/comment/create/", param, function(data){
       var ret = JSON.parse(data);
       if (ret["status"] == "ok"){
         $("#commentContent").val("");
-        window.location.href = "/article/list/2"
+        window.location.href = "/article/detail/{{ a.id }}?page_no=" + {{pagination_data.page_cnt}}
       } else {
           alert(ret["msg"]);
       }

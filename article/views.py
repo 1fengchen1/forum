@@ -66,17 +66,15 @@ class ArticleDetailView(DetailView):
     template_name = 'article_detail.html'
     context_object_name = "a"
 
-    '''
     #展示评论内容(在DetailView展示其他内容)
-    def get_context_data(self, **kwargs):                       #重载了context_object_name
-        context = super().get_context_data(**kwargs)            #context得到的字典{'a':文章的对象}
-        page_no = int(self.request.GET.get("page_no", "1"))     #当前页
-        all_comments = Comment.objects.filter(article=context["a"], #全量数据
-                                               status=0)
+    def get_context_data(self, **kwargs):                                       #重载了context_object_name
+        context = super().get_context_data(**kwargs)                            #context得到的字典{'a':文章的对象}
+        page_no = int(self.request.GET.get("page_no", "1"))                     #当前页
+        all_comments = Comment.objects.filter(article=context["a"],status=0)    #全量数据
+        print(all_comments)
         comments, pagination_data = paginate_queryset(all_comments,
                                     page_no, cnt_per_page=3)
-        context['comments'] = comments                          #这一页相关的评论(相当于render()的第三个参数)
-        context['pagination_data'] = pagination_data            #这一页相关的其他页
-        return context                                          #
-    '''
+        context['comments'] = comments                                          #这一页相关的评论(相当于render()的第三个参数)
+        context['pagination_data'] = pagination_data                            #这一页相关的其他页
+        return context                                                          #
 

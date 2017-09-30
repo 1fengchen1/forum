@@ -20,14 +20,14 @@
       <center>
       <div class="well">
         <p>{{ user.username }}.欢迎您来到Python技术栈</p>
-        <a href="/accounts/logout">退出</a>
+        <a style="float:left" href="/accounts/logout">退出</a><a style="float:right" href="/accounts/password_change/">修改密码</a>
       </div>
       </center>
     {% else%}
       <center>
       <div class="well">
         <p>匿名用户.欢迎您来到Python技术栈</p>
-        <a style="float:left" href="/accounts/login">登录</a><a style="float:right" href="/accounts/password_change/">修改密码</a>
+        <a style="float:left" href="/accounts/login">登录</a><a style="float:right" href="/registers/">注册</a>
       </div>
       </center>
     {% endif%}
