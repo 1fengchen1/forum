@@ -2,7 +2,6 @@ from django.db import models
 from article.models import Article
 
 class Comment(models.Model):
-
     article = models.ForeignKey(Article, verbose_name="文章")
     owner = models.CharField("评论人", max_length=20)
     content = models.CharField("评论内容", max_length=10000)
@@ -10,6 +9,7 @@ class Comment(models.Model):
             choices=((0, "正常"),(-1, "删除")))
     create_timestamp = models.DateTimeField("创建时间", auto_now_add=True)
     last_update_timestamp = models.DateTimeField("更新时间", auto_now=True)
+    to_comment = models.ForeignKey("self", null=True, blank=True, verbose_name="被回复评论ID")
 
     def __str__(self):
         return self.owner

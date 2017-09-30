@@ -38,7 +38,18 @@
     {% for comment in comments %}
     <tr>
       <td>{{ comment.owner }}</td>
-      <td>{{ comment.content }}</td>
+      <td>
+        {% if comment.to_coment %}
+          <blockquote>
+            <b>{{ comment.to_comment.owner}}:</b>
+            <br/>
+            {{ comment.to_comment.content|linebreaksbr }}
+          </blockquote>
+        {% endif %}
+        {{ comment.content|linebreaksbr }}
+        <a href="#replyRegion" data-id="{{ comment.id }}"
+            class="replyBtn btn btn-primary pull-right">回复</a>
+      </td>
     </tr>
     {% endfor %}
   </tbody>
@@ -82,8 +93,9 @@
 <!--创建评论部分的表单-->
 <div class="form-horizontal">
 <div class="form-group">
-  <div class="col-xs-12 col-sm-12">
-    <textarea id="commentContent" class="form-control" rows="5" name="content" placeholder="内容">{{ comment.content }}</textarea>
+  <div class="col-xs-12 col-sm-12" id="replyRegion">
+    <textarea id="commentContent" class="form-control" rows="5" name="content" placeholder="内容">
+      {{ comment.content }}</textarea>
   </div>
 </div>
 <div class="form-group">
@@ -102,16 +114,22 @@
 <script type="text/javascript" src="/static/js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="/static/js/jquery.csrf.js"></script>
 <script type="text/javascript">
+var to_comment_id = 0;
+$(".replyBtn").click(function(e){
+  to_comment_id = parseInt($(e.target).attr("data-id"));
+  $("#commentContent").focus();
+  return false;
+});
+
 $(document).ready(function(){
   var article_id = {{ a.id }}
-
   $("#commentBtn").click(function(){
     var comment = $("#commentContent").val();
-    var param = {"article_id":article_id, 'content':comment};
-    alert(comment)
+    var param = {"article_id":article_id, 'content':comment, 'to_comment':to_comment_id};
     $.post("/comment/create/", param, function(data){
       var ret = JSON.parse(data);
       if (ret["status"] == "ok"){
+        alert('评论成功')
         $("#commentContent").val("");
         window.location.href = "/article/detail/{{ a.id }}?page_no=" + {{pagination_data.page_cnt}}
       } else {
@@ -120,6 +138,7 @@ $(document).ready(function(){
     });
   })
 });
+
 </script>
 <!--创建评论部分的js请求处理-->
 {% endblock %}

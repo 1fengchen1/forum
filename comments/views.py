@@ -6,13 +6,18 @@ def comment_create(request):
     owner= request.user                                             #登录人
     content = request.POST['content'].strip()                       #评论内容
     article_id = request.POST["article_id"]
-
+    to_comment_id  = int(request.POST.get("to_comment"))         #回复的评论，默认为0
     article = Article.objects.get(id=article_id)                    #评论的文章
     if not content:                                                 #判断内容为空时
         error = {"status":"error","msg":"信息不能为空"}
         return json_response(error)
+    if to_comment_id != 0:
+        to_comment = Comment.objects.get(id=to_comment_id)
+    else:
+        to_comment = None
+
     comment = Comment(owner=owner, article=article,                 #将要保存的内容放进comment对象
-                      content=content, status=0)
+                      content=content, status=0, to_comment=to_comment)
 
     comment.save()                                                  #将数据保存到数据库
     sucess = {"status":"ok"}
