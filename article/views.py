@@ -71,7 +71,6 @@ class ArticleDetailView(DetailView):
         context = super().get_context_data(**kwargs)                            #context得到的字典{'a':文章的对象}
         page_no = int(self.request.GET.get("page_no", "1"))                     #当前页
         all_comments = Comment.objects.filter(article=context["a"],status=0)    #全量数据
-        print(all_comments)
         comments, pagination_data = paginate_queryset(all_comments,
                                     page_no, cnt_per_page=3)
         context['comments'] = comments                                          #这一页相关的评论(相当于render()的第三个参数)

@@ -6,8 +6,8 @@ class Article(models.Model):
 
     owner = models.ForeignKey(User, verbose_name="作者")
     block = models.ForeignKey(Block, verbose_name="板块ID") #Block表结构外键的引用
-    title = models.CharField("板块名字", max_length=100)
-    content = models.CharField("板块描述", max_length=10000)
+    title = models.CharField("文章标题", max_length=100)
+    content = models.CharField("文章内容", max_length=10000)
     status = models.IntegerField("状态",
             choices=((0, "正常"), (-1, "删除")))
 

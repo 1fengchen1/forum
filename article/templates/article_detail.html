@@ -39,9 +39,9 @@
     <tr>
       <td>{{ comment.owner }}</td>
       <td>
-        {% if comment.to_coment %}
+        {% if comment.to_comment %}
           <blockquote>
-            <b>{{ comment.to_comment.owner}}:</b>
+            <b>{{ comment.to_comment.owner }}:</b>
             <br/>
             {{ comment.to_comment.content|linebreaksbr }}
           </blockquote>

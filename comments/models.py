@@ -11,9 +11,10 @@ class Comment(models.Model):
     last_update_timestamp = models.DateTimeField("更新时间", auto_now=True)
     to_comment = models.ForeignKey("self", null=True, blank=True, verbose_name="被回复评论ID")
 
-    def __str__(self):
-        return self.owner
 
-    class Mate:
+    def __str__(self):
+        return str(self.id)
+
+    class Meta:
         verbose_name = "评论内容"
         verbose_name_plural = "评论内容"
