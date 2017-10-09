@@ -19,7 +19,7 @@
     {% if user.is_authenticated %}
       <center>
       <div class="well">
-        <p>{{ user.username }}.欢迎您来到Python技术栈</p>
+        <p>{{ user.username }}.欢迎您来到Python技术栈<a href="message/list/"><span class="badge">{{ msg_cnt }}</span></a></p>
         <a style="float:left" href="/accounts/logout">退出</a><a style="float:right" href="/accounts/password_change/">修改密码</a>
       </div>
       </center>

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<table class="table table-striped">
+	{% for unmsg in unmsgs %}
+	<tr>
+		<td><a id="msg" data-id="{{ unmsg.id }}" href="{{ unmsg.link }}">{{ unmsg.content }}</a></td>
+	</tr>
+	{% endfor %}
+</table>
+<script type="text/javascript" src="/static/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="/static/js/jquery.csrf.js"></script>
+<script type="text/javascript">
+$("#msg").click(function(){
+	var id = $("#msg").attr("data-id")
+	param = {"id":id}
+	$.post("/message/read/?id={{ id }}", param, function(){
+		var ret = JSON.parse(data);
+		if (ret["status"] == "ok"){
+			window.location.href = "{{ unmsg.link }}"
+		} else{
+				alter(ret["msg"]);
+		}
+	});
+});
+</script>
+{% endblock %}

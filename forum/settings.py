@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'article',
     'registers',
     'comments',
+    'instationmsg',
 ]
 
 MIDDLEWARE = [
