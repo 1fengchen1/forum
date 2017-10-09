@@ -2,6 +2,7 @@ from .jsonresponse import json_response
 from .models import Comment
 from instationmsg.models import Message
 from article.models import Article
+from article.views import ArticleDetailView
 
 def comment_create(request):
     owner= request.user                                             #登录人
@@ -23,8 +24,8 @@ def comment_create(request):
 
     comment = Comment(owner=owner, article=article,                 #将要保存的内容放进comment对象
                       content=content, status=0, to_comment=to_comment)
-
-    message = Message(owner=owner_msg, content=content_unmsg, link=request.get_full_path(), status=-1)
+    link = "/article/detail/" + str(article) + "?page_no=" + ArticleDetailView.get_context_data().pagination_data.current_no
+    message = Message(owner=owner_msg, content=content_unmsg, link=link, status=-1)
     comment.save()                                                  #将数据保存到数据库
     message.save()
     sucess = {"status":"ok"}
