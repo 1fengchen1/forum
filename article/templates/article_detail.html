@@ -74,7 +74,7 @@
     {% endif %}
     {% if page_link == pagination_data.current_no %}
     <li class="active">
-      <a id="current_no" href="?page_no={{ page_link }}">{{ page_link }}</a>
+      <a href="?page_no={{ page_link }}">{{ page_link }}</a>
     </li>
     {% endif %}
     {% endfor %}
@@ -84,7 +84,7 @@
       <a href="?page_no={{ pagination_data.next_link }}">&raquo;</a>
     </li>
     <li>
-      <a href="?page_no={{ pagination_data.page_cnt }}">尾页</a>
+      <a id="pag" data-p="?page_no={{ pagination_data.page_cnt }}" href="?page_no={{ pagination_data.page_cnt }}">尾页</a>
     </li>
     {% endif %}
   </ul>
@@ -124,8 +124,8 @@ $(document).ready(function(){
   var article_id = {{ a.id }}
   $("#commentBtn").click(function(){
     var comment = $("#commentContent").val();
-    var current_no = $("#current_no").html()
-    var param = {"article_id":article_id, 'content':comment, 'to_comment':to_comment_id, 'current_no':current_no};
+    var page_no = $("#pag").attr("data-p")
+    var param = {"article_id":article_id, 'content':comment, 'to_comment':to_comment_id, 'page_no':page_no};
     $.post("/comment/create/", param, function(data){
       var ret = JSON.parse(data);
       if (ret["status"] == "ok"){
