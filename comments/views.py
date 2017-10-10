@@ -24,7 +24,8 @@ def comment_create(request):
 
     comment = Comment(owner=owner, article=article,                 #将要保存的内容放进comment对象
                       content=content, status=0, to_comment=to_comment)
-    link = "/article/detail/" + str(article) + "?page_no=" + ArticleDetailView.get_context_data().pagination_data.current_no
+    current_no= request.POST["current_no"]
+    link = "/article/detail/" + str(article.id) + "/?page_no=" + current_no
     message = Message(owner=owner_msg, content=content_unmsg, link=link, status=-1)
     comment.save()                                                  #将数据保存到数据库
     message.save()

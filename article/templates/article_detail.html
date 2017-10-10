@@ -74,7 +74,7 @@
     {% endif %}
     {% if page_link == pagination_data.current_no %}
     <li class="active">
-      <a href="?page_no={{ page_link }}">{{ page_link }}</a>
+      <a id="current_no" href="?page_no={{ page_link }}">{{ page_link }}</a>
     </li>
     {% endif %}
     {% endfor %}
@@ -124,7 +124,8 @@ $(document).ready(function(){
   var article_id = {{ a.id }}
   $("#commentBtn").click(function(){
     var comment = $("#commentContent").val();
-    var param = {"article_id":article_id, 'content':comment, 'to_comment':to_comment_id};
+    var current_no = $("#current_no").html()
+    var param = {"article_id":article_id, 'content':comment, 'to_comment':to_comment_id, 'current_no':current_no};
     $.post("/comment/create/", param, function(data){
       var ret = JSON.parse(data);
       if (ret["status"] == "ok"){
