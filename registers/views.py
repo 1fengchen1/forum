@@ -19,7 +19,7 @@ def register(request):
             password = form.cleaned_data["password"]
             repassword = request.POST["repassword"]
             aemail = User.objects.all().values('email')
-            allemail = [key for item in aemail for key in item.values()]
+            allemail = [key for item in aemail for key in item.values()]            #所有已注册的email
             print(allemail)
             ########两次密码不一致########
             if password != repassword:  # 密码不一致的响应提示
