@@ -33,4 +33,4 @@ urlpatterns = [
     url(r'^message/read/', readmsg),           #处理已读信息
 ]
 
-admin.site.disable_action('delete_selected')
+#admin.site.disable_action('delete_selected')
