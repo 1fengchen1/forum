@@ -102,4 +102,5 @@ ENV/
 .mypy_cache/
 
 forum/secret.py
+.idea
 .idea/workspace.xml
