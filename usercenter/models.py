@@ -8,6 +8,8 @@ class UserProfile(models.Model):
             choices=((0, "男"),(1, "女")), default=0)
     birthday = models.DateTimeField("生日",
                 null=True, blank=True)
+    avatar = models.CharField("头像",
+                max_length=300, blank=True)             #blank设置为True时，可以为空；为False时，不可以为空
 
     def __str__(self):
         return str(self.user)
