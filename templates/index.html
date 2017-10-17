@@ -19,6 +19,15 @@
     {% if user.is_authenticated %}
       <center>
       <div class="well">
+        {% if user.userprofile.avatar %}
+          <img src="{{ user.userprofile.avatar }}"
+               style="width:100%; height:150px;"
+               all="头像" />
+        {% else %}
+          <a href="/usercenter/uploadavatar">
+            您还没有头像，去上传
+          </a>
+        {% endif %}
         <p>{{ user.username }}.欢迎您来到Python技术栈<a href="message/list/"><span class="badge">{{ msg_cnt }}</span></a></p>
         <a style="float:left" href="/accounts/logout">退出</a><a style="float:right" href="/accounts/password_change/">修改密码</a>
       </div>

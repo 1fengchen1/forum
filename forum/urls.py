@@ -19,6 +19,7 @@ from django.contrib import admin
 from registers.views import register,approveemil
 from comments.views import comment_create
 from instationmsg.views import unreadmsg,readmsg
+from usercenter.views import upload_avatar
 import views
 
 urlpatterns = [
@@ -31,6 +32,7 @@ urlpatterns = [
     url(r'^comment/create/$', comment_create),  #创建评论的js处理函数
     url(r'^message/list/$', unreadmsg),         #未读信息列表
     url(r'^message/read/', readmsg),           #处理已读信息
+    url(r'^usercenter/uploadavatar/$', upload_avatar)            #头像上传页面
 ]
 
 #admin.site.disable_action('delete_selected')
