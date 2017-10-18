@@ -38,7 +38,7 @@ def register(request):
             else:
                 user = User.objects.create_user(username, email, password)
                 user.is_active = False
-                print(user.id)
+                #print(user.id)
 
                 ########激活码链接发送到邮箱########
                 activation_code = str(uuid.uuid4()).replace("-", "")                             # 激活码
@@ -56,7 +56,7 @@ def register(request):
                 user.save()                                                                 # 保存到用户表
                 user_id = User.objects.get(username=username)
                 sex = sex[0]
-                print(type(sex))
+                #print(type(sex))
                 userprofile = UserProfile(user=user_id, birthday=birthday, sex=sex)
                 userprofile.save()
                 return render(request, "register_sucess.html")
