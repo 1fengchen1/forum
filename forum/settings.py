@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'registers.apps.RegistersAppConfig',
     'comments.apps.CommentsAppConfig',
     'instationmsg.apps.InstationmsgAppConfig',
+    'usercenter.apps.UserCenterAppConfig',
 ]
 
 MIDDLEWARE = [

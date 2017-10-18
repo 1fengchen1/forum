@@ -39,14 +39,37 @@
 	      <input type="email" class="form-control" placeholder="Email"
 	             name="email" value="{{ form.email.value }}" aria-describedby="sizing-addon1">
 	    </div>
-	    <div>
+
+			<div class="input-group input-group-lg panel">
+	      <span class="input-group-addon" id="sizing-addon6">出生日期</span>
+	      <input class="form-control" placeholder="Birthday" type="text" data-beatpicker="true"
+	             name="birthday" value="{{ form.birthday.value }}" aria-describedby="sizing-addon1">
+	    </div>
+
+			<div class="radio input-group input-group-lg panel"  style="line-height:30px;">
+				<span class="input-group-addon" id="sizing-addon5">性别</span>
+				<div class="radio-inline form-control">
+					<label >&nbsp;&nbsp;
+						<input  type="radio" name="sex" id="inlineRadio1" value="0" checked> 男
+						&nbsp;&nbsp;&nbsp;&nbsp;
+						<input type="radio" name="sex" id="inlineRadio2" value="1"> 女
+					</label>
+				</div>
+			</div>
+
+			<br/>
+
+			<div>
 	      <center><button class="btn btn-info">注 册</button></center>
 	    </div>
 	  </div>
   </form>
 
 </div>
-<div class="col-xs-12">
+
+<div class="col-xs-12" style="height:100px;">
 	你已经注册，那就去<a href="/accounts/login/">登录</a>
 </div>
+<script type="text/javascript" src="/static/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="/static/js/BeatPicker.min.js"></script>
 {% endblock %}
