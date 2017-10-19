@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
+{% if error %}
+  <div class="alert alert-danger">{{ error }}</div>
+{% endif %}
+
 <form method="post" action="" enctype="multipart/form-data">{% csrf_token %}
     <label>上传头像</label>
     <input name="avatar" type="file" />
