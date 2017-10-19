@@ -20,7 +20,9 @@
   <tbody>
     <tr>
       <td>{{ a.owner }}</td>
+      {% autoescape off %}
       <td>{{ a.content }}</td>
+      {% endautoescape %}
     </tr>
   </tbody>
 </table>
