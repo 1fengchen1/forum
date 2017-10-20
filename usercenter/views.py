@@ -15,7 +15,7 @@ def upload_avatar(request):
             return  render(request, "upload_avatar.html", {'error':'图片大小要小于2M'})
         else:
         ############文件不能大于2M############
-            father_path = os.getcwd()     #当前文件的目录
+            father_path = os.path.join(os.path.dirname(os.getcwd()) + "\\forum_auxiliary\\userfile\\")     #当前文件的目录
             avatar_path = father_path + "\\userres\\avatar\\"                                    #图片统一存放路径
             name = avatar_file.name.split('.')[1]
             file_name = user + '.' + name                           #修改文件的名字为user.格式
