@@ -135,7 +135,7 @@ LOGIN_REDIRECT_URL = "/"
 
 #富文本输入框存储位置和访问URL
 article_path = os.getcwd() + "\\userres\\article\\"
-print(article_path)
+#print(article_path)
 MEDIA_ROOT = article_path
 MEDIA_URL = "http://localhost/userres/article/"
 
