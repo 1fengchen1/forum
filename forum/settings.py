@@ -134,8 +134,8 @@ STATICFILES_DIRS = (
 LOGIN_REDIRECT_URL = "/"
 
 #富文本输入框存储位置和访问URL
-article_path =os.path.join(os.path.dirname(os.getcwd()) + "\\forum_auxiliary\\userfile\\userres\\article\\")
-#print(article_path)
+article_path =os.path.join(os.getcwd() + "\\resource\\userfile\\userres\\article\\")
+print(article_path)
 MEDIA_ROOT = article_path
 MEDIA_URL = "http://localhost/userres/article/"
 

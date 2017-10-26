@@ -1,5 +1,4 @@
 import configparser
-from forum.settings import BASE_DIR
 import os
 
 config = configparser.ConfigParser()    #实例化配置解析器
